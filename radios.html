@@ -3,12 +3,20 @@
 <head>
   <title>Your Page Title</title>
  <style>
+ html, body {
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   background: linear-gradient(to bottom, #5ca9e9, #e4f3e3);
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+ }
    .grid-container {
      display: grid;
      grid-gap: 10px;
      height: 72vh;
      padding: 10px;
-     background: linear-gradient(to bottom, #5ca9e9, #e4f3e3);
    }
    .grid-item {
      background: white;
@@ -19,14 +27,14 @@
      overflow: auto;
      border-radius: 30px;
    }
-   @media (max-width: 1080px) {
+   @media (max-width: 768px) {
      .grid-container {
        grid-template-columns: repeat(1, 1fr);
        grid-template-rows: repeat(10, 1fr);
        height: auto;
      }
    }
-   @media (min-width: 1081px) {
+   @media (min-width: 769px) {
      .grid-container {
        grid-template-columns: repeat(2, 1fr);
        grid-template-rows: repeat(5, 1fr);
@@ -36,16 +44,16 @@
 </head>
 <body>
   <div class="grid-container">
-    <div class="grid-item" id="snippet1"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/6/2196f3/0/0" style="width:375px; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="snippet2"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/2/e91e63/0/0" style="width:375px; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="snippet3"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/20/9c27b0/0/0" style="width:375px; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="snippet4"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/46/f44336/0/0" style="width:375px; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="snippet5"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/1/ffeb3b/0/0" style="width:375px; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="snippet6"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/11/2196f3/0/0" style="width:375px; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="snippet7"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/12/000000/0/0" style="width:375px; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="snippet8"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/4/2196f3/0/0" style="width:375px; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="snippet9"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/31/cddc39/0/0" style="width:375px; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="snippet10"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/17/9c27b0/0/0" style="width:375px; height:100px;" scrolling="no"></iframe></div>
+    <div class="grid-item" id="snippet1"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/6/2196f3/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
+    <div class="grid-item" id="snippet2"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/2/e91e63/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
+    <div class="grid-item" id="snippet3"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/20/9c27b0/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
+    <div class="grid-item" id="snippet4"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/46/f44336/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
+    <div class="grid-item" id="snippet5"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/1/ffeb3b/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
+    <div class="grid-item" id="snippet6"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/11/2196f3/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
+    <div class="grid-item" id="snippet7"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/12/000000/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
+    <div class="grid-item" id="snippet8"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/4/2196f3/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
+    <div class="grid-item" id="snippet9"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/31/cddc39/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
+    <div class="grid-item" id="snippet10"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/17/9c27b0/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
   </div>
 </body>
 </html>
