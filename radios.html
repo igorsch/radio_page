@@ -203,8 +203,8 @@
     .radio-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(6, 1fr);
-      gap: 2rem;
+      grid-template-rows: repeat(7, 1fr);
+      gap: 1rem;
       padding: 2rem;
       max-width: 1400px;
       margin: 0 auto;
@@ -369,8 +369,40 @@
       background: #3282b8;
     }
 
-    .theme-mystic .pulse-animation {
-      background: #7209b7;
+    .theme-cyber {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%, #0a0a0a 100%);
+      color: #7dd3fc;
+    }
+
+    .theme-cyber::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        repeating-linear-gradient(0deg, transparent 0px, rgba(125,211,252,0.05) 1px, transparent 2px, transparent 40px),
+        repeating-linear-gradient(90deg, transparent 0px, rgba(125,211,252,0.05) 1px, transparent 2px, transparent 40px),
+        repeating-linear-gradient(45deg, transparent 0px, rgba(125,211,252,0.03) 1px, transparent 2px, transparent 80px),
+        repeating-linear-gradient(-45deg, transparent 0px, rgba(125,211,252,0.03) 1px, transparent 2px, transparent 80px);
+      background-size: 40px 40px, 40px 40px, 80px 80px, 80px 80px;
+      z-index: -1;
+    }
+
+    .theme-cyber::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+      background-size: 120px 120px;
+      background-repeat: repeat;
+      opacity: 0.02;
+      z-index: -1;
     }
 
     @keyframes pulse {
@@ -486,7 +518,7 @@
     }
   </style>
 </head>
-<body class="theme-prism">
+<body class="theme-cyber">
   <div class="floating-shapes">
     <div class="floating-shape"></div>
     <div class="floating-shape"></div>
@@ -502,6 +534,7 @@
       <button class="theme-btn prism active" data-theme="prism">💎 Prism</button>
       <button class="theme-btn bloom" data-theme="bloom">🌸 Bloom</button>
       <button class="theme-btn haven" data-theme="haven">🌊 Haven</button>
+      <button class="theme-btn cyber" data-theme="cyber">🔺 Cyber</button>
       <button class="theme-btn mystic" data-theme="mystic">🔮 Mystic</button>
     </div>
   </div>
@@ -531,7 +564,7 @@
     <div class="radio-tile" style="--index: 4">
       <div class="pulse-animation"></div>
       <div class="radio-player">
-        <iframe src="https://radio.fonki.pro/plugins/embed/46/f4646b/0/0"></iframe>
+        <iframe src="https://radio.fonki.pro/plugins/embed/375/2196f3/1/1"></iframe>
       </div>
     </div>
 
@@ -552,21 +585,21 @@
     <div class="radio-tile" style="--index: 7">
       <div class="pulse-animation"></div>
       <div class="radio-player">
-        <iframe src="https://radio.fonki.pro/plugins/embed/12/666a6d/0/0"></iframe>
+        <iframe src="https://radio.fonki.pro/plugins/embed/440/4caf50/1/1"></iframe>
       </div>
     </div>
 
     <div class="radio-tile" style="--index: 8">
       <div class="pulse-animation"></div>
       <div class="radio-player">
-        <iframe src="https://radio.fonki.pro/plugins/embed/4/006bf7/0/0"></iframe>
+        <iframe src="https://radio.fonki.pro/plugins/embed/748/ff9800/1/1"></iframe>
       </div>
     </div>
 
     <div class="radio-tile" style="--index: 9">
       <div class="pulse-animation"></div>
       <div class="radio-player">
-        <iframe src="https://radio.fonki.pro/plugins/embed/617/3BA9E3/0/0"></iframe>
+        <iframe src="https://radio.fonki.pro/plugins/embed/28/3F3F3F/0/0"></iframe>
       </div>
     </div>
 
@@ -587,10 +620,12 @@
     <div class="radio-tile" style="--index: 12">
       <div class="pulse-animation"></div>
       <div class="radio-player">
-        <iframe src="https://radio.fonki.pro/plugins/embed/770/AEDA90/0/0"></iframe>
+        <iframe src="https://radio.fonki.pro/plugins/embed/17/9B69A7/1/1"></iframe>
       </div>
     </div>
   </div>
+
+
 
   <script>
     // Theme switching
@@ -598,7 +633,7 @@
     const body = document.body;
     
     // Load saved theme
-    const savedTheme = 'prism'; // Don't use localStorage
+    const savedTheme = 'cyber'; // Don't use localStorage
     let currentTheme = savedTheme;
     
     themeButtons.forEach(btn => {
