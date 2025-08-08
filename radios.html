@@ -1,63 +1,649 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Christian Radio</title>
- <style>
- html, body {
-   height: 100%;
-   margin: 0;
-   padding: 0;
-   background: linear-gradient(-30deg, #ee77527d, #e73c7e7d, #23a6d57a, #23d5ab78);
-   background-size: cover;
-   background-repeat: no-repeat;
-   background-position: center center;
-   background-attachment: fixed;
- }
-   .grid-container {
-     display: grid;
-     grid-gap: 15px;
-     height: 72vh;
-     padding: 10px;
-   }
-   .grid-itemz {
-     background: white;
-     opacity: 0.92;
-     border: 3px solid black;
-     padding: 10px;
-     font-size: 30px;
-     text-align: center;
-     overflow: auto;
-     border-radius: 30px;
-   }
-   @media (max-width: 1081px) {
-     .grid-container {
-       grid-template-columns: repeat(1, 1fr);
-       grid-template-rows: repeat(10, 1fr);
-       height: auto;
-     }
-   }
-   @media (min-width: 1082px) {
-     .grid-container {
-       grid-template-columns: repeat(2, 1fr);
-       grid-template-rows: repeat(5, 1fr);
-     }
-   }
- </style>
+  <title>Christian Radio Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Geometric Background Themes */
+    .theme-bloom {
+      background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 25%, #fd79a8 50%, #fdcb6e 75%, #a29bfe 100%);
+      color: #2d3436;
+    }
+
+    .theme-bloom::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255,234,167,0.2) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(253,121,168,0.15) 0%, transparent 40%),
+        repeating-linear-gradient(30deg, transparent, transparent 12px, rgba(162,155,254,0.08) 12px, rgba(162,155,254,0.08) 24px),
+        repeating-conic-gradient(from 45deg at 60% 40%, transparent 0deg, rgba(250,177,160,0.1) 60deg, transparent 120deg);
+      background-size: 180px 180px, 200px 200px, 48px 48px, 120px 120px;
+      z-index: -1;
+    }
+
+    .theme-prism {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+      color: #ffffff;
+    }
+
+    .theme-prism::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        repeating-conic-gradient(from 0deg at 20% 80%, transparent 0deg, rgba(255,255,255,0.08) 60deg, transparent 120deg),
+        repeating-conic-gradient(from 180deg at 80% 20%, transparent 0deg, rgba(255,255,255,0.06) 60deg, transparent 120deg),
+        linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.1) 50%, transparent 52%);
+      background-size: 100px 100px, 150px 150px, 80px 80px;
+      z-index: -1;
+    }
+
+    .theme-haven {
+      background: linear-gradient(135deg, #0f4c75 0%, #3282b8 50%, #bbe1fa 100%);
+      color: #ffffff;
+    }
+
+    .theme-haven::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 30%),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.08) 0%, transparent 30%),
+        repeating-linear-gradient(30deg, transparent, transparent 15px, rgba(255,255,255,0.05) 15px, rgba(255,255,255,0.05) 30px),
+        polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      background-size: 200px 200px, 180px 180px, 60px 60px, 40px 40px;
+      z-index: -1;
+    }
+
+    .theme-mystic {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #7209b7 100%);
+      color: #e0e6ff;
+    }
+
+    .theme-mystic::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at 30% 30%, rgba(114,9,183,0.2) 0%, transparent 70%),
+        radial-gradient(ellipse at 70% 70%, rgba(83,52,131,0.15) 0%, transparent 70%),
+        repeating-linear-gradient(60deg, transparent, transparent 8px, rgba(224,230,255,0.03) 8px, rgba(224,230,255,0.03) 16px),
+        conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(114,9,183,0.1) 72deg, transparent 144deg, rgba(83,52,131,0.08) 216deg, transparent 288deg);
+      background-size: 300px 300px, 250px 250px, 32px 32px, 120px 120px;
+      z-index: -1;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      position: relative;
+      z-index: 10;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header-content {
+      flex: 1;
+      padding-left: 1rem;
+    }
+
+    .header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      text-shadow: 0 0 20px rgba(255,255,255,0.5);
+    }
+
+    .header p {
+      font-size: 1rem;
+      opacity: 0.8;
+      font-weight: 300;
+    }
+
+    /* Theme Switcher */
+    .theme-switcher {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding-right: 1rem;
+    }
+
+    .theme-btn {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .theme-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .theme-btn:hover::before {
+      left: 100%;
+    }
+
+    .theme-btn.bloom {
+      background: rgba(253, 121, 168, 0.2);
+      color: #2d3436;
+      border: 1px solid rgba(253, 121, 168, 0.4);
+    }
+
+    .theme-btn.prism {
+      background: linear-gradient(90deg, rgba(102,126,234,0.2), rgba(244,147,251,0.2), rgba(245,87,108,0.2));
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .theme-btn.haven {
+      background: rgba(50, 130, 184, 0.2);
+      color: #ffffff;
+      border: 1px solid rgba(50, 130, 184, 0.4);
+    }
+
+    .theme-btn.mystic {
+      background: rgba(114, 9, 183, 0.2);
+      color: #e0e6ff;
+      border: 1px solid rgba(114, 9, 183, 0.4);
+    }
+
+    .theme-btn.active {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+    }
+
+    /* Radio Grid */
+    .radio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .radio-tile {
+      position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 0.75rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      min-height: 140px;
+      animation: fadeInUp 0.8s ease forwards;
+      animation-delay: calc(var(--index) * 0.1s);
+      opacity: 0;
+    }
+
+    .radio-tile::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      border-radius: 20px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .radio-tile:hover::before {
+      opacity: 1;
+    }
+
+    .radio-tile:hover {
+      transform: translateY(-10px) rotateX(5deg);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .radio-tile::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .theme-bloom .radio-tile {
+      background: rgba(253, 121, 168, 0.1);
+      border-color: rgba(253, 121, 168, 0.3);
+      box-shadow: inset 0 0 20px rgba(253, 121, 168, 0.1);
+    }
+
+    .theme-prism .radio-tile {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-haven .radio-tile {
+      background: rgba(50, 130, 184, 0.1);
+      border-color: rgba(50, 130, 184, 0.3);
+      box-shadow: inset 0 0 20px rgba(50, 130, 184, 0.1);
+    }
+
+    .theme-mystic .radio-tile {
+      background: rgba(114, 9, 183, 0.1);
+      border-color: rgba(114, 9, 183, 0.3);
+      box-shadow: inset 0 0 20px rgba(114, 9, 183, 0.1);
+    }
+
+    .tile-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .station-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .station-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: inherit;
+      filter: blur(10px);
+      opacity: 0.5;
+    }
+
+    .station-info h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .station-info p {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .radio-player {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      padding: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .radio-player iframe {
+      width: 100%;
+      height: 98px;
+      border: none;
+      border-radius: 10px;
+      background: transparent;
+    }
+
+    .pulse-animation {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 12px;
+      height: 12px;
+      background: #00ff88;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .theme-bloom .pulse-animation {
+      background: #fd79a8;
+    }
+
+    .theme-prism .pulse-animation {
+      background: #f093fb;
+    }
+
+    .theme-haven .pulse-animation {
+      background: #3282b8;
+    }
+
+    .theme-mystic .pulse-animation {
+      background: #7209b7;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+      }
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+      }
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+      }
+      
+      .header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .radio-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .radio-tile {
+        min-height: 140px;
+      }
+      
+      .theme-switcher {
+        gap: 0.5rem;
+      }
+      
+      .theme-btn {
+        padding: 0.5rem 0.9rem;
+        font-size: 0.75rem;
+      }
+    }
+
+    /* Floating Elements */
+    .floating-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .floating-shape {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-shape:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(45deg, currentColor, transparent);
+      border-radius: 50%;
+      animation-delay: 0s;
+    }
+
+    .floating-shape:nth-child(2) {
+      top: 60%;
+      right: 15%;
+      width: 60px;
+      height: 60px;
+      background: currentColor;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation-delay: 2s;
+    }
+
+    .floating-shape:nth-child(3) {
+      bottom: 20%;
+      left: 20%;
+      width: 40px;
+      height: 40px;
+      background: currentColor;
+      transform: rotate(45deg);
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+    }
+  </style>
 </head>
-<body>
-  <div class="grid-container">
-    <div class="grid-item" id="1 - Volna Schastya"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/6/4f9bd2/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="2 - Novaya Zhizn"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/2/e91e63/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="3 - Chistaya Volna"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/20/b02d7c/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="4 - NG Radio Show"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/46/f4646b/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="5 - JT Rado"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/1/efcf51/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="6 - RU Worship"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/11/2196f3/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="7 - Radio MV Russian"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/12/666a6d/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="8 - Radio 123"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/4/006bf7/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="9 - Svobodnoe Radio"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/617/3BA9E3/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="10 - PHARE FM Hits"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/191/9FC121/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="11 - Новое Радио Hit"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/50/42628F/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="12 - Голос мира - песни прошлых лет"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/770/AEDA90/0/0" style="width:90%; height:100px;" scrolling="no"></iframe></div>
+<body class="theme-prism">
+  <div class="floating-shapes">
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
   </div>
+
+  <div class="header">
+    <div class="header-content">
+      <h1>✨ Christian Radio Hub ✨</h1>
+      <p>Discover faith-filled music and inspiring messages</p>
+    </div>
+    <div class="theme-switcher">
+      <button class="theme-btn prism active" data-theme="prism">💎 Prism</button>
+      <button class="theme-btn bloom" data-theme="bloom">🌸 Bloom</button>
+      <button class="theme-btn haven" data-theme="haven">🌊 Haven</button>
+      <button class="theme-btn mystic" data-theme="mystic">🔮 Mystic</button>
+    </div>
+  </div>
+
+  <div class="radio-grid">
+    <div class="radio-tile" style="--index: 1">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/6/4f9bd2/0/0"></iframe>
+      </div>
+    </div>
+
+    <div class="radio-tile" style="--index: 2">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/2/e91e63/0/0"></iframe>
+      </div>
+    </div>
+
+    <div class="radio-tile" style="--index: 3">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/20/b02d7c/0/0"></iframe>
+      </div>
+    </div>
+
+    <div class="radio-tile" style="--index: 4">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/46/f4646b/0/0"></iframe>
+      </div>
+    </div>
+
+    <div class="radio-tile" style="--index: 5">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/1/efcf51/0/0"></iframe>
+      </div>
+    </div>
+
+    <div class="radio-tile" style="--index: 6">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/11/2196f3/0/0"></iframe>
+      </div>
+    </div>
+
+    <div class="radio-tile" style="--index: 7">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/12/666a6d/0/0"></iframe>
+      </div>
+    </div>
+
+    <div class="radio-tile" style="--index: 8">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/4/006bf7/0/0"></iframe>
+      </div>
+    </div>
+
+    <div class="radio-tile" style="--index: 9">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/617/3BA9E3/0/0"></iframe>
+      </div>
+    </div>
+
+    <div class="radio-tile" style="--index: 10">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/191/9FC121/0/0"></iframe>
+      </div>
+    </div>
+
+    <div class="radio-tile" style="--index: 11">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/50/42628F/0/0"></iframe>
+      </div>
+    </div>
+
+    <div class="radio-tile" style="--index: 12">
+      <div class="pulse-animation"></div>
+      <div class="radio-player">
+        <iframe src="https://radio.fonki.pro/plugins/embed/770/AEDA90/0/0"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme switching
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    const body = document.body;
+    
+    // Load saved theme
+    const savedTheme = 'prism'; // Don't use localStorage
+    let currentTheme = savedTheme;
+    
+    themeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        themeButtons.forEach(b => b.classList.remove('active'));
+        
+        // Add active class to clicked button
+        btn.classList.add('active');
+        
+        // Change theme
+        const theme = btn.dataset.theme;
+        body.className = `theme-${theme}`;
+        currentTheme = theme;
+      });
+    });
+
+    // Parallax effect for floating shapes
+    document.addEventListener('mousemove', (e) => {
+      const shapes = document.querySelectorAll('.floating-shape');
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      
+      shapes.forEach((shape, index) => {
+        const speed = (index + 1) * 0.5;
+        const xPos = (x - 0.5) * speed * 50;
+        const yPos = (y - 0.5) * speed * 50;
+        
+        shape.style.transform = `translate(${xPos}px, ${yPos}px) rotate(${xPos}deg)`;
+      });
+    });
+
+    // Add staggered animation to tiles
+    const tiles = document.querySelectorAll('.radio-tile');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    tiles.forEach(tile => {
+      observer.observe(tile);
+    });
+  </script>
 </body>
 </html>
