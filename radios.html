@@ -2,85 +2,111 @@
 <html>
 <head>
   <title>Christian Radio</title>
- <style>
- html, body {
-   height: 100%;
-   margin: 0;
-   padding: 0;
-   background: linear-gradient(-30deg, #ee77527d, #e73c7e7d, #23a6d57a, #23d5ab78);
-   background-size: cover;
-   background-repeat: no-repeat;
-   background-position: center center;
-   background-attachment: fixed;
- }
-   .grid-container {
-     display: grid;
-     grid-gap: 15px;
-     height: 72vh;
-     padding: 10px;
-   }
-   .grid-itemz {
-     background: white;
-     opacity: 0.92;
-     border: 3px solid black;
-     padding: 10px;
-     font-size: 30px;
-     text-align: center;
-     overflow: auto;
-     border-radius: 30px;
-   }
-   @media (max-width: 1081px) {
-     .grid-container {
-       grid-template-columns: repeat(1, 1fr);
-       grid-template-rows: repeat(10, 1fr);
-       height: auto;
-     }
-   }
-   @media (min-width: 1082px) {
-     .grid-container {
-       grid-template-columns: repeat(2, 1fr);
-       grid-template-rows: repeat(5, 1fr);
-     }
-   }
- </style>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(-30deg, #ee77527d, #e73c7e7d, #23a6d57a, #23d5ab78);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+    }
+    .grid-container {
+      display: grid;
+      grid-gap: 15px;
+      height: 72vh;
+      padding: 10px;
+    }
+    .grid-item {
+      background: white;
+      opacity: 0.92;
+      border: 3px solid black;
+      padding: 10px;
+      font-size: 30px;
+      text-align: center;
+      overflow: auto;
+      border-radius: 30px;
+    }
+    .player-container {
+      width: 97%;
+      height: 90px;
+      margin: auto;
+    }
+    @media (max-width: 1081px) {
+      .grid-container {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        height: auto;
+      }
+    }
+    @media (min-width: 1082px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+      }
+    }
+  </style>
 </head>
-<div id="radio-player"></div>
-
-<script>
-const playerContainer = document.getElementById('radio-player');
-const script = document.createElement('script');
-script.src = 'https://radio.fonki.pro/plugins/embed/6/4f9bd2/0/0';
-playerContainer.appendChild(script);
-</script>
+<body>
   <div class="grid-container">
     <div class="grid-item" id="1 - Volna Schastya">
-      <iframe frameborder="no" 
-        src="https://radio.fonki.pro/plugins/embed/6/4f9bd2/0/0" 
-        style="width:97%; height:90px;" 
-        scrolling="no" 
-        sandbox="allow-scripts allow-same-origin allow-popups">
-      </iframe>
+      <div class="player-container" id="player-1"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/6/4f9bd2/0/0"></script>
     </div>
     <div class="grid-item" id="2 - Novaya Zhizn">
-      <iframe frameborder="no" 
-        src="https://radio.fonki.pro/plugins/embed/2/e91e63/0/0" 
-        style="width:97%; height:90px;" 
-        scrolling="no"
-        sandbox="allow-scripts allow-same-origin allow-popups">
-      </iframe>
+      <div class="player-container" id="player-2"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/2/e91e63/0/0"></script>
     </div>
-    <div class="grid-item" id="3 - Chistaya Volna"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/20/b02d7c/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="4 - Новое сердце"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/804/626567/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="5 - JT Rado"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/1/efcf51/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="6 - RU Worship"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/11/2196f3/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="7 - Christian Life Radio"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/89/00bcd4/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="8 - Radio 123"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/4/006bf7/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="9 - Слово благодати"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/192/275B7A/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="10 - Радио Христианская Песня"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/440/7EC607/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="11 - Позитивное Радио Россия"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/375/ff9800/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="12 - Авто Радио «Открытое"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/637/f44336/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="13 - ткрытое Слово"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/385/f44336/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
-    <div class="grid-item" id="14 - Голос мира - песни прошлых лет"><iframe frameborder="no" src="https://radio.fonki.pro/plugins/embed/28/3F3F3F/0/0" style="width:97%; height:90px;" scrolling="no"></iframe></div>
+    <div class="grid-item" id="3 - Chistaya Volna">
+      <div class="player-container" id="player-3"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/20/b02d7c/0/0"></script>
+    </div>
+    <div class="grid-item" id="4 - Новое сердце">
+      <div class="player-container" id="player-4"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/804/626567/0/0"></script>
+    </div>
+    <div class="grid-item" id="5 - JT Rado">
+      <div class="player-container" id="player-5"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/1/efcf51/0/0"></script>
+    </div>
+    <div class="grid-item" id="6 - RU Worship">
+      <div class="player-container" id="player-6"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/11/2196f3/0/0"></script>
+    </div>
+    <div class="grid-item" id="7 - Christian Life Radio">
+      <div class="player-container" id="player-7"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/89/00bcd4/0/0"></script>
+    </div>
+    <div class="grid-item" id="8 - Radio 123">
+      <div class="player-container" id="player-8"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/4/006bf7/0/0"></script>
+    </div>
+    <div class="grid-item" id="9 - Слово благодати">
+      <div class="player-container" id="player-9"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/192/275B7A/0/0"></script>
+    </div>
+    <div class="grid-item" id="10 - Радио Христианская Песня">
+      <div class="player-container" id="player-10"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/440/7EC607/0/0"></script>
+    </div>
+    <div class="grid-item" id="11 - Позитивное Радио Россия">
+      <div class="player-container" id="player-11"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/375/ff9800/0/0"></script>
+    </div>
+    <div class="grid-item" id="12 - Авто Радио «Открытое»">
+      <div class="player-container" id="player-12"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/637/f44336/0/0"></script>
+    </div>
+    <div class="grid-item" id="13 - Открытое Слово">
+      <div class="player-container" id="player-13"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/385/f44336/0/0"></script>
+    </div>
+    <div class="grid-item" id="14 - Голос мира - песни прошлых лет">
+      <div class="player-container" id="player-14"></div>
+      <script src="https://radio.fonki.pro/plugins/embed/28/3F3F3F/0/0"></script>
+    </div>
   </div>
 </body>
 </html>
