@@ -44,20 +44,18 @@
    }
  </style>
 </head>
-<object 
-    type="application/x-mpegURL"
-    data="https://radio.fonki.pro/plugins/embed/6/4f9bd2/0/0"
-    width="100%"
-    height="90px"
-    style="border: none; background: transparent;"
->
-    <param name="autoplay" value="false" />
-    <param name="autoStart" value="0" />
-</object>
+<div id="radio-player"></div>
+
+<script>
+const playerContainer = document.getElementById('radio-player');
+const script = document.createElement('script');
+script.src = 'https://radio.fonki.pro/plugins/embed/6/4f9bd2/0/0';
+playerContainer.appendChild(script);
+</script>
   <div class="grid-container">
     <div class="grid-item" id="1 - Volna Schastya">
       <iframe frameborder="no" 
-        src="http://radio.fonki.pro/plugins/embed/6/4f9bd2/0/0" 
+        src="https://radio.fonki.pro/plugins/embed/6/4f9bd2/0/0" 
         style="width:97%; height:90px;" 
         scrolling="no" 
         sandbox="allow-scripts allow-same-origin allow-popups">
