@@ -2,6 +2,9 @@
 <html>
 <head>
   <title>Christian Radio</title>
+  <meta charset="UTF-8">
+  <!-- Attempt to relax CSP for script and media, if you control the server -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://radio.fonki.pro; script-src 'self' https://radio.fonki.pro 'unsafe-inline'; media-src https://radio.fonki.pro; connect-src https://radio.fonki.pro">
   <style>
     html, body {
       height: 100%;
@@ -33,6 +36,13 @@
       width: 97%;
       height: 90px;
       margin: auto;
+      position: relative;
+      background: #f0f0f0; /* Light background to indicate container */
+    }
+    .error-message {
+      color: red;
+      font-size: 14px;
+      text-align: center;
     }
     @media (max-width: 1081px) {
       .grid-container {
@@ -108,5 +118,19 @@
       <script src="https://radio.fonki.pro/plugins/embed/28/3F3F3F/0/0"></script>
     </div>
   </div>
+  <script>
+    // Debugging script to check if players are rendering
+    document.querySelectorAll('.player-container').forEach((container, index) => {
+      setTimeout(() => {
+        if (!container.hasChildNodes()) {
+          console.warn(`Player ${index + 1} failed to render in container #${container.id}`);
+          // Display error message in the container instead of iframe
+          container.innerHTML = `<div class="error-message">Failed to load player ${index + 1}. Check CSP or script compatibility.</div>`;
+        } else {
+          console.log(`Player ${index + 1} rendered successfully in container #${container.id}`);
+        }
+      }, 5000); // Wait 5 seconds to allow scripts to load
+    });
+  </script>
 </body>
 </html>
